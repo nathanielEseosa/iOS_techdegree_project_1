@@ -1,4 +1,3 @@
-
 // All 18 players
 let player1: [String: Any] = ["name": "Joe Smith", "height": 42.0, "hasExperience": true , "guardianName": "Jim and Jan Smith"]
 let player2: [String: Any] = ["name": "Jill Tanner", "height": 36.0 ,"hasExperience": true ,"guardianName": "Clara Tanner"]
@@ -19,14 +18,19 @@ let player16: [String: Any] = ["name": "Phillip Helm", "height": 44.0, "hasExper
 let player17: [String: Any] = ["name": "Les Clay", "height": 42.0 ,"hasExperience": true ,"guardianName": "Wynonna Brown"]
 let player18: [String: Any] = ["name": "Herschel Krustofski", "height": 45.0 ,"hasExperience": true ,"guardianName": "Hyman and Rachel Krustofski"]
 
-// Experience group
-var experiencedPlayers = [[String:Any]]()
-var inexperiencedPlayers = [[String:Any]]()
+// Players expeerience groups
+var experiencedPlayersList = [[String:Any]]()
+var inexperiencedPlayersList = [[String:Any]]()
 
-// Teams
+
+// The teams
 var teamDragons = [[String:Any]]()
 var teamSharks = [[String:Any]]()
 var teamRaptors = [[String:Any]]()
+
+// The league
+let theLeague = [teamDragons, teamSharks, teamRaptors]
+let amountOfTeamsInTheLeague = theLeague.count
 
 // Practice date and time
 let practiceDateAndTimeDragons = "March 17, 1pm"
@@ -35,70 +39,82 @@ let practiceDateAndTimeRaptors = "March 18, 1pm"
 
 
 // An array of dictionaries that hold all players
-var theLeague: [[String:Any]] = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13, player14, player15, player16, player17, player18]
+var players: [[String:Any]] = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12, player13, player14, player15, player16, player17, player18]
 
 
-/* A loop that iterate through the League and​ ​check​ ​each​ ​player’s​ ​experience​ ​level.
+/* A loop that iterate through the players collection and​ ​check​ ​each​ ​player’s​ ​experience​ ​level.
    If​ ​a​ ​player​ ​is​ ​experienced,​ the​ ​player will be​ ​added to​ ​the​ ​experienced​ ​collection.
    If​ ​a​ ​player​ ​is​ ​inexperienced,​ the​ ​player​ ​will be added to​ ​the​ ​inexperiencedcollection.
 */
-for player in theLeague{
+for player in players{
     if let hasExperience = player["hasExperience"] as? Bool{
         if hasExperience == true {
-            experiencedPlayers.append(player)
+            experiencedPlayersList.append(player)
         } else {
-            inexperiencedPlayers.append(player)
+            inexperiencedPlayersList.append(player)
         }
     }
 }
 
-// A loop that iterate​ ​through​ ​the​ ​experienced​ ​and​ ​inexperienced​ ​collection and​ ​assign​ ​players​ ​alternately​ ​to​ ​each​ ​of​ ​the​ ​3​ ​teams
-for player in experiencedPlayers{
-    if teamDragons.count < 3 {
-        teamDragons.append(player)
-    } else if teamSharks.count < 3 {
-        teamSharks.append(player)
-    } else if teamRaptors.count < 3 {
-        teamRaptors.append(player)
+// Max players per team
+var maxExperiencedPlayersPerTeam = experiencedPlayersList.count / amountOfTeamsInTheLeague
+var maxinexperiencedPlayersPerTeam = inexperiencedPlayersList.count / amountOfTeamsInTheLeague + amountOfTeamsInTheLeague
+
+// A loop that iterate​ ​through​ ​the​ ​experienced​ ​collection and​ ​assign​ ​players​ ​alternately​ ​to​ ​each​ ​of​ ​the​ ​3​ ​teams
+for expieriencedPlayer in experiencedPlayersList{
+    if teamDragons.count < maxExperiencedPlayersPerTeam {
+        teamDragons.append(expieriencedPlayer)
+    } else if teamSharks.count < maxExperiencedPlayersPerTeam {
+        teamSharks.append(expieriencedPlayer)
+    } else if teamRaptors.count < maxExperiencedPlayersPerTeam {
+        teamRaptors.append(expieriencedPlayer)
     }
 }
 
-for player in inexperiencedPlayers{
-    if teamDragons.count < 6 {
-        teamDragons.append(player)
-    } else if teamSharks.count < 6 {
-        teamSharks.append(player)
-    } else if teamRaptors.count < 6 {
-        teamRaptors.append(player)
+// A loop that iterate​ ​through​ ​the​ ​inexperienced​ ​collection and​ ​assign​ ​players​ ​alternately​ ​to​ ​each​ ​of​ ​the​ ​3​ ​teams
+for inExpieriencedPlayer in inexperiencedPlayersList{
+    if teamDragons.count < maxinexperiencedPlayersPerTeam {
+        teamDragons.append(inExpieriencedPlayer)
+    } else if teamSharks.count < maxinexperiencedPlayersPerTeam {
+        teamSharks.append(inExpieriencedPlayer)
+    } else if teamRaptors.count < maxinexperiencedPlayersPerTeam {
+        teamRaptors.append(inExpieriencedPlayer)
     }
 }
 
-// This loops iterates through all three teams of players and generates a personalized letter to the guardians.
+// Guardian letters
+var letters = [String]()
 
+
+ //These loops iterates through all three teams of players and generates a personalized letter to the guardians.
 for players in teamDragons{
     if let player = players["name"]{
         if let guradian = players["guardianName"] {
-            print("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeDragons).")
+            letters.append("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeDragons).")
         }
     }
 }
 
-print("===========================================================================================================")
 
 for players in teamSharks{
     if let player = players["name"]{
         if let guradian = players["guardianName"] {
-            print("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeSharks).")
+            letters.append("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeDragons).")
         }
     }
 }
 
-print("===========================================================================================================")
 
 for players in teamRaptors{
     if let player = players["name"]{
         if let guradian = players["guardianName"] {
-            print("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeRaptors).")
+            letters.append("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeDragons).")
         }
     }
 }
+
+// Printing the guardian letters
+for letter in letters{
+    print(letter)
+}
+
