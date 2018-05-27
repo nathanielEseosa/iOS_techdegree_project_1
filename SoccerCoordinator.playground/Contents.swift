@@ -30,7 +30,6 @@ var teamRaptors = [[String:Any]]()
 
 // The league
 let theLeague = [teamDragons, teamSharks, teamRaptors]
-let amountOfTeamsInTheLeague = theLeague.count
 
 // Practice date and time
 let practiceDateAndTimeDragons = "March 17, 1pm"
@@ -57,8 +56,10 @@ for player in players{
 }
 
 // Max players per team
-var maxExperiencedPlayersPerTeam = experiencedPlayersList.count / amountOfTeamsInTheLeague
-var maxinexperiencedPlayersPerTeam = inexperiencedPlayersList.count / amountOfTeamsInTheLeague + amountOfTeamsInTheLeague
+var maxExperiencedPlayersPerTeam = experiencedPlayersList.count / theLeague.count
+
+// Total players per team
+var totalPlayersPerTeam = players.count / theLeague.count
 
 // A loop that iterate​ ​through​ ​the​ ​experienced​ ​collection and​ ​assign​ ​players​ ​alternately​ ​to​ ​each​ ​of​ ​the​ ​3​ ​teams
 for expieriencedPlayer in experiencedPlayersList{
@@ -73,11 +74,11 @@ for expieriencedPlayer in experiencedPlayersList{
 
 // A loop that iterate​ ​through​ ​the​ ​inexperienced​ ​collection and​ ​assign​ ​players​ ​alternately​ ​to​ ​each​ ​of​ ​the​ ​3​ ​teams
 for inExpieriencedPlayer in inexperiencedPlayersList{
-    if teamDragons.count < maxinexperiencedPlayersPerTeam {
+    if teamDragons.count < totalPlayersPerTeam {
         teamDragons.append(inExpieriencedPlayer)
-    } else if teamSharks.count < maxinexperiencedPlayersPerTeam {
+    } else if teamSharks.count < totalPlayersPerTeam {
         teamSharks.append(inExpieriencedPlayer)
-    } else if teamRaptors.count < maxinexperiencedPlayersPerTeam {
+    } else if teamRaptors.count < totalPlayersPerTeam {
         teamRaptors.append(inExpieriencedPlayer)
     }
 }
@@ -86,7 +87,7 @@ for inExpieriencedPlayer in inexperiencedPlayersList{
 var letters = [String]()
 
 
- //These loops iterates through all three teams of players and generates a personalized letter to the guardians.
+// These loops iterates through all three teams of players and generates a personalized letter to the guardians.
 for players in teamDragons{
     if let player = players["name"]{
         if let guradian = players["guardianName"] {
