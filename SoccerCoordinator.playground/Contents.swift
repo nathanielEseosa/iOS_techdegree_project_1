@@ -91,7 +91,7 @@ var letters = [String]()
 for players in teamDragons{
     if let player = players["name"]{
         if let guradian = players["guardianName"] {
-            letters.append("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeDragons).")
+            letters.append("Dear \(guradian). \(player) is on team Dragons and their first practice is on \(practiceDateAndTimeDragons).")
         }
     }
 }
@@ -100,7 +100,7 @@ for players in teamDragons{
 for players in teamSharks{
     if let player = players["name"]{
         if let guradian = players["guardianName"] {
-            letters.append("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeDragons).")
+            letters.append("Dear \(guradian). \(player) is on team Sharks and their first practice is on \(practiceDateAndTimeSharks).")
         }
     }
 }
@@ -109,7 +109,7 @@ for players in teamSharks{
 for players in teamRaptors{
     if let player = players["name"]{
         if let guradian = players["guardianName"] {
-            letters.append("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeDragons).")
+            letters.append("Dear \(guradian). \(player) is on team Raptors and their first practice is on \(practiceDateAndTimeRaptors).")
         }
     }
 }
